@@ -1,9 +1,19 @@
+'use client'
 import React from 'react';
 import styles from './Card.module.css';
 import { TiTick } from 'react-icons/ti';
-import { FaTimes } from 'react-icons/fa'; // Import the 'x' icon
+import { FaTimes } from 'react-icons/fa';
 
 export default function Card({ name, price, duration, features }) {
+  const phoneNumber = '543496506678';
+  const message = `Hola! Quiero el plan ${name}, que cuesta ${price}. Como lo puedo pagar?`;
+
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  const redirectToWhatsApp = () => {
+    window.location.href = whatsappUrl; // Redirigir en la misma ventana
+  };
+
   return (
     <div className='m-4'>
       <div className={styles.packContainer}>
@@ -17,20 +27,22 @@ export default function Card({ name, price, duration, features }) {
         </div>
         <ul className={styles.lists}>
           {features.map((feature, index) => (
-            <li key={index} className={styles.list}>
+            <li key={feature.id} className={styles.list}>
               <span
                 className={`${styles.listIcon} ${
                   feature.included ? styles.greenBg : styles.redBg
                 }`}
               >
-                {feature.included ? <TiTick /> : <FaTimes />} {/* Display the 'x' icon */}
+                {feature.included ? <TiTick /> : <FaTimes />}
               </span>
               <p>{feature.description}</p>
             </li>
           ))}
         </ul>
         <div className={styles.buttonContainer}>
-          <button className={styles.button}>Obtener plan</button>
+          <button className={styles.button} onClick={redirectToWhatsApp}>
+            Obtener plan
+          </button>
         </div>
       </div>
     </div>
