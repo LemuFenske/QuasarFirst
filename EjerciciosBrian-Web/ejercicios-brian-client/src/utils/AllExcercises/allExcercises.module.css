@@ -1,0 +1,10 @@
+ .cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.cardsContainer {
+    height: 100%;
+    padding-top: 10px;
+}
